@@ -1,0 +1,18 @@
+//node js
+
+const os = require('os');
+const path = require('path');
+
+require('dotenv').config()
+require('dotenv').config({ path: path.join(os.homedir(),'.meraki.env') })
+
+const meraki = require('meraki');
+const configuration = meraki.Configuration;
+
+configuration.xCiscoMerakiAPIKey = process.env.x_cisco_meraki_api_key;
+
+meraki.OrganizationsController.getOrganizations().then(function(res) {
+		console.log(res)
+		console.log("Sample orgName parameter="+process.env.orgName)
+	}
+);
